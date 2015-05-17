@@ -27,8 +27,71 @@ namespace Video_Name_Finder
             Net.Process_File_Read_All_Actor_Name(Global_Def.PATH_DATABASE);
         }
 
+        /// <summary>
+        /// A video data that has already finished
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public int Process_A_Data(string Path)
+        {
+            int Status = ErrorDef.EFI_SUCCESS;
+
+            //
+            // Fill data into structure
+            //
+            Global_Def._VIDEO_INFO.File_Name = Path;
+            Global_Def._VIDEO_INFO.Video_ID = Str.Analyze_Video_ID(Path);
+            if (Global_Def._VIDEO_INFO.Video_ID.Length > 0)
+            {
+                Global_Def._VIDEO_INFO.Video_Name = Net.Process_Web_Read_Video_Name(Global_Def._VIDEO_INFO.Video_ID);
+                Global_Def._VIDEO_INFO.Actor_Name = Str.Find_Actor_Name(Global_Def._VIDEO_INFO.Video_Name);
+                if (Global_Def._VIDEO_INFO.Video_Name.Length > 0 && Global_Def._VIDEO_INFO.Actor_Name.Length > 0)
+                {
+                    Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Actor_Name + " - " + Global_Def._VIDEO_INFO.Video_Name + " ( " + Global_Def._VIDEO_INFO.Video_ID + " )";
+                }
+                else if (Global_Def._VIDEO_INFO.Video_Name.Length > 0)
+                {
+                    Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Video_Name + " ( " + Global_Def._VIDEO_INFO.Video_ID + " )";
+                }
+                else
+                {
+                    Global_Def._VIDEO_INFO.Rename = "";
+                }
+
+                //
+                // Rename
+                //
+                if (Global_Def._VIDEO_INFO.Rename.Length > 0)
+                {
+                    Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
+                }
+
+                //
+                // Print status
+                //
+                richTextBox_Status_Information.AppendText("File_Name: " + Global_Def._VIDEO_INFO.File_Name + "\n");
+                richTextBox_Status_Information.AppendText("Actor_Name: " + Global_Def._VIDEO_INFO.Actor_Name + "\n");
+                richTextBox_Status_Information.AppendText("Video_ID: " + Global_Def._VIDEO_INFO.Video_ID + "\n");
+                richTextBox_Status_Information.AppendText("Video_Name: " + Global_Def._VIDEO_INFO.Video_Name + "\n");
+                richTextBox_Status_Information.AppendText("Rename: " + Global_Def._VIDEO_INFO.Rename + "\n");
+                richTextBox_Status_Information.AppendText("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + "\n");
+            }
+
+            return Status;
+        }
+
         private void button_AnalyzeFileName_Click(object sender, EventArgs e)
         {
+            //
+            // Clear all rich text box
+            //
+            richTextBox_Status_Information.Clear();
+            richTextBox_Rename_Before.Clear();
+            richTextBox_Rename_After.Clear();
+
+            //
+            // Open folder diag box
+            //
             if (textBox_File_Name.Text == "")
             {
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
@@ -36,26 +99,25 @@ namespace Video_Name_Finder
                     textBox_File_Name.Text = folderBrowserDialog.SelectedPath;
                 }
             }
-            Global_Def._VIDEO_INFO.File_Name = textBox_File_Name.Text;
-            Global_Def._VIDEO_INFO.Video_ID = Str.AnalyzeFileName(textBox_File_Name.Text);
-            Global_Def._VIDEO_INFO.Video_Name = Net.Process_Web_Read_Video_Name(Global_Def._VIDEO_INFO.Video_ID);
-            Global_Def._VIDEO_INFO.Actor_Name = Str.Find_Actor_Name(Global_Def._VIDEO_INFO.Video_Name);
-            if (Global_Def._VIDEO_INFO.Actor_Name.Length > 0)
-            {
-                Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Actor_Name + " - " + Global_Def._VIDEO_INFO.Video_Name + " (" + Global_Def._VIDEO_INFO.Video_ID + ")";
-            }
-            else 
-            {
-                Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Video_Name + " (" + Global_Def._VIDEO_INFO.Video_ID + ")";
-            }
-            Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
 
-            richTextBox_Status_Information.AppendText("File_Name: " + Global_Def._VIDEO_INFO.File_Name + "\n");
-            richTextBox_Status_Information.AppendText("Actor_Name: " + Global_Def._VIDEO_INFO.Actor_Name + "\n");
-            richTextBox_Status_Information.AppendText("Video_ID: " + Global_Def._VIDEO_INFO.Video_ID + "\n");
-            richTextBox_Status_Information.AppendText("Video_Name: " + Global_Def._VIDEO_INFO.Video_Name + "\n");
-            richTextBox_Status_Information.AppendText("Rename: " + Global_Def._VIDEO_INFO.Rename + "\n");
+            //
+            // Parsing folder
+            //
+            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text);
+            string[] split = temp_folder.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
+            //
+            // Parsing file
+            //
+
+            //
+            // Output to rich text box
+            //
+            foreach (string s_name in split)
+            {
+                richTextBox_Rename_Before.AppendText(s_name + "\n");
+                Process_A_Data(s_name);
+            }
         }
     }
 }

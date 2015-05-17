@@ -27,7 +27,7 @@ public class Str
     /// </summary>
     /// <param name="file_name"></param>
     /// <returns>Video ID</returns>
-    public static string AnalyzeFileName(string file_name)
+    public static string Analyze_Video_ID(string file_name)
     {
         string result = "";
         int p_string = 0;
@@ -52,6 +52,11 @@ public class Str
                 p_digit = p_string;
                 break;
             }
+        }
+
+        if (p_string <= 3)
+        {
+            return "";
         }
 
         if (file_name.Substring(p_string - 1, 1) == "-")
@@ -173,4 +178,33 @@ public class Str
         return Status;
     }
 
+    /// <summary>
+    /// Recursive find folder name
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns>
+    /// All folder name
+    /// </returns>
+    public static string Find_Folder_Recursive(string path)
+    {
+        string result = path;
+
+        try 
+        { 
+            //先找出所有目錄 
+            foreach (string d in Directory.GetDirectories(path)) 
+            {
+                result = result + "\n" + d;
+
+                //此目錄處理完再針對每個子目錄做處理 
+                Find_Folder_Recursive(d); 
+            } 
+        } 
+        catch (System.Exception excpt) 
+        { 
+            Console.WriteLine(excpt.Message); 
+        } 
+
+        return result;
+    }
 }

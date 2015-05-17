@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Windows.Forms;
 
 public class Net
@@ -36,7 +37,12 @@ public class Net
         result = sr.ReadToEnd();
 
         //關掉WebResponse
-        myResponse.Close(); 
+        myResponse.Close();
+
+        //
+        // 避免被 Ban, 慢慢抓資料
+        //
+        Thread.Sleep(Global_Def.WEB_SLEEP_TIME);
         
         return result;
     }
@@ -118,7 +124,17 @@ public class Net
         string temp = "";
         int start = 0;
 
+        if (Video_ID.Length == 0)
+        {
+            return "";
+        }
+
         temp = GetWebsiteContent(@"http://www.avsow.net/tw/search/" + Video_ID);
+
+        if (temp.IndexOf("搜尋沒有結果") > 0)
+        {
+            return "";
+        }
 
         //搜尋關鍵字
         start = temp.IndexOf("border-top");
