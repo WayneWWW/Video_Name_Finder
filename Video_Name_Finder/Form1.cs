@@ -19,6 +19,11 @@ namespace Video_Name_Finder
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        private void button_Find_All_Actors_Name_Click(object sender, EventArgs e)
+        {
             Net.Process_File_Read_Actor_Name(Global_Def.PATH_DATABASE);
         }
     }

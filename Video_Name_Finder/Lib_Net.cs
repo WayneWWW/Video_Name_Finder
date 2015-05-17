@@ -24,7 +24,7 @@ public class Net
         /* Sart browser signature */
 
         //Method選擇GET
-        myRequest.Method = "POST";
+        myRequest.Method = "GET";
 
         //取得WebRequest的回覆
         WebResponse myResponse = myRequest.GetResponse();
@@ -56,20 +56,20 @@ public class Net
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static int Process_File_Read_Actor_Name(String path)
+    public static int Process_File_Read_Actor_Name(string path)
     {
         try
         {
             using (StreamReader sr = new StreamReader(path))
             {
-                String line = sr.ReadToEnd();
+                string line = sr.ReadToEnd();
 
                 sr.Close();
             }
         }
         catch (Exception e_sr)
         {
-            MessageBox.Show(e_sr.Message);
+            MessageBox.Show(e_sr.Message + "\nCreating " + path + " in folder.");
         }
         finally
         {
@@ -80,7 +80,7 @@ public class Net
 
             do
             {
-                result = GetWebsiteContent(@"http://www.avsow.com/tw/actresses/currentPage/1/");
+                result = GetWebsiteContent(@"http://www.avsow.com/tw/actresses/currentPage/" + page_number.ToString() + "/");
 
                 //搜尋關鍵字
                 int start = result.IndexOf("<div id=\"waterfall\">");
@@ -101,7 +101,9 @@ public class Net
                 page_number++;
             } while (result.IndexOf("下一頁") > 0);
 
+            //
             //Close the file
+            //
             sw.Close();
         }
 

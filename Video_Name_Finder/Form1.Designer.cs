@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button_Find_All_Actors_Name = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button_Find_All_Actors_Name
+            // 
+            this.button_Find_All_Actors_Name.Location = new System.Drawing.Point(12, 12);
+            this.button_Find_All_Actors_Name.Name = "button_Find_All_Actors_Name";
+            this.button_Find_All_Actors_Name.Size = new System.Drawing.Size(200, 30);
+            this.button_Find_All_Actors_Name.TabIndex = 0;
+            this.button_Find_All_Actors_Name.Text = "Find all actors name";
+            this.button_Find_All_Actors_Name.UseVisualStyleBackColor = true;
+            this.button_Find_All_Actors_Name.Click += new System.EventHandler(this.button_Find_All_Actors_Name_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.button_Find_All_Actors_Name);
             this.Name = "Form1";
             this.Text = "Video Name Finder";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -43,6 +55,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button button_Find_All_Actors_Name;
     }
 }
 

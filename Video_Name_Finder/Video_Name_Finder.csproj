@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="GlobalDef.cs" />
     <Compile Include="Lib_Net.cs" />
+    <Compile Include="Lib_String.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
