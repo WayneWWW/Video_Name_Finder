@@ -42,21 +42,11 @@ public class Net
     }
 
     /// <summary>
-    /// Read actor name to memory
-    /// </summary>
-    /// <param name="path">File path</param>
-    /// <returns>Status</returns>
-    public static int Read_Actor_Name(String path)
-    {
-        return ErrorDef.EFI_SUCCESS;
-    }
-
-    /// <summary>
     /// File stream for Read actor name to memory
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static int Process_File_Read_Actor_Name(string path)
+    public static int Process_File_Read_All_Actor_Name(string path)
     {
         try
         {
@@ -80,6 +70,11 @@ public class Net
 
             do
             {
+                //
+                // Todo: Find a way to call main form rtc member
+                //
+                //richTextBox_Status_Information.AppendText("Process: " + "http://www.avsow.com/tw/actresses/currentPage/" + page_number.ToString() + "/" + "\n");
+                
                 result = GetWebsiteContent(@"http://www.avsow.com/tw/actresses/currentPage/" + page_number.ToString() + "/");
 
                 //搜尋關鍵字
@@ -108,5 +103,30 @@ public class Net
         }
 
         return ErrorDef.EFI_SUCCESS;
+    }
+
+    /// <summary>
+    /// Retireve video name from web
+    /// </summary>
+    /// <param name="Video_ID"></param>
+    /// <returns>
+    /// Video name
+    /// </returns>
+    public static string Process_Web_Read_Video_Name(string Video_ID)
+    {
+        string result = "";
+        string temp = "";
+        int start = 0;
+
+        temp = GetWebsiteContent(@"http://www.avsow.net/tw/search/" + Video_ID);
+
+        //搜尋關鍵字
+        start = temp.IndexOf("border-top");
+        temp = temp.Substring(start);
+        start = temp.IndexOf("target=\"_blank\">");
+        temp = temp.Substring(start + 16);
+        result = temp.Remove(temp.IndexOf("</a>"));
+
+        return result;
     }
 }
