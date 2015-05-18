@@ -197,7 +197,7 @@ public class Str
     /// <returns>
     /// All folder name
     /// </returns>
-    public static string Find_Folder_Recursive(string path, bool IsFolder)
+    public static string Find_Folder_Recursive(string path, bool IsFolder, bool File_Recursive)
     {
         string result = path;
 
@@ -210,6 +210,11 @@ public class Str
                 {
                     result = result + "\n" + f;
                 }
+            }
+
+            if (!File_Recursive && !IsFolder)
+            {
+                return result;
             }
 
             //先找出所有目錄 
@@ -229,7 +234,7 @@ public class Str
                 }
 
                 //此目錄處理完再針對每個子目錄做處理 
-                Find_Folder_Recursive(d, IsFolder); 
+                Find_Folder_Recursive(d, IsFolder, File_Recursive);
             } 
         } 
         catch (System.Exception excpt) 

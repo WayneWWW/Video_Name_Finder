@@ -17,5 +17,15 @@ public class Global_Def
         public static string Video_ID;
         public static string Video_Name;
         public static string Rename;
+
+        public static void Clear()
+        {
+            File_Name = "";
+            File_Ext_Name = "";
+            Actor_Name = "";
+            Video_ID = "";
+            Video_Name = "";
+            Rename = "";
+        }
     };
 }

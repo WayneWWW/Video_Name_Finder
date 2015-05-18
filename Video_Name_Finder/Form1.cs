@@ -75,7 +75,7 @@ namespace Video_Name_Finder
                         Global_Def._VIDEO_INFO.File_Ext_Name = "";
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
 
@@ -115,6 +115,7 @@ namespace Video_Name_Finder
             richTextBox_Status_Information.Clear();
             richTextBox_Rename_Before.Clear();
             richTextBox_Rename_After.Clear();
+            Global_Def._VIDEO_INFO.Clear();
 
             //
             // Open folder diag box
@@ -130,7 +131,7 @@ namespace Video_Name_Finder
             //
             // Parsing folder
             //
-            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, true);
+            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, true, checkBox_Recursive.Checked);
             string[] split = temp_folder.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             //
@@ -140,6 +141,7 @@ namespace Video_Name_Finder
             {
                 richTextBox_Rename_Before.AppendText(s_name + "\n");
                 Process_A_Data(s_name);
+                richTextBox_Rename_After.AppendText(Global_Def._VIDEO_INFO.Rename + "\n");
                 richTextBox_Status_Information.SelectionStart = richTextBox_Status_Information.Text.Length;
                 richTextBox_Status_Information.ScrollToCaret();
             }
@@ -157,6 +159,7 @@ namespace Video_Name_Finder
             richTextBox_Status_Information.Clear();
             richTextBox_Rename_Before.Clear();
             richTextBox_Rename_After.Clear();
+            Global_Def._VIDEO_INFO.Clear();
 
             //
             // Open folder diag box
@@ -172,7 +175,7 @@ namespace Video_Name_Finder
             //
             // Parsing file
             //
-            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, false);
+            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, false, checkBox_Recursive.Checked);
             string[] split = temp_folder.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             //
@@ -182,6 +185,7 @@ namespace Video_Name_Finder
             {
                 richTextBox_Rename_Before.AppendText(s_name + "\n");
                 Process_A_Data(s_name);
+                richTextBox_Rename_After.AppendText(Global_Def._VIDEO_INFO.Rename + "\n");
                 richTextBox_Status_Information.SelectionStart = richTextBox_Status_Information.Text.Length;
                 richTextBox_Status_Information.ScrollToCaret();
             }
