@@ -58,9 +58,22 @@ namespace Video_Name_Finder
                     Global_Def._VIDEO_INFO.Rename = "";
                 }
 
+                //
+                // bugbugbug: Here should be fix in the feature
+                //
+                // Analyze path if it is folder or file
+                //
                 try
                 {
-                    Global_Def._VIDEO_INFO.File_Ext_Name = Path.Substring(Path.LastIndexOf("."));
+                    string File_Ext_Name = Path.Substring(Path.LastIndexOf("."));
+                    if (File_Ext_Name.Length <= 4)
+                    {
+                        Global_Def._VIDEO_INFO.File_Ext_Name = Path.Substring(Path.LastIndexOf("."));
+                    }
+                    else
+                    {
+                        Global_Def._VIDEO_INFO.File_Ext_Name = "";
+                    }
                 }
                 catch (Exception e)
                 {
@@ -71,8 +84,11 @@ namespace Video_Name_Finder
                 //
                 if (Global_Def._VIDEO_INFO.Rename.Length > 0)
                 {
-                    Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Rename + Global_Def._VIDEO_INFO.File_Ext_Name;
-                    //Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
+                    if (Global_Def._VIDEO_INFO.File_Ext_Name.Length > 0)
+                    {
+                        Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Rename + Global_Def._VIDEO_INFO.File_Ext_Name;
+                    }
+                    Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
                 }
 
 
@@ -129,6 +145,8 @@ namespace Video_Name_Finder
             }
 
             richTextBox_Status_Information.AppendText("Done!\n");
+
+            textBox_File_Name.Clear();
         }
 
         private void button_Process_File_Name_Click(object sender, EventArgs e)
@@ -169,6 +187,8 @@ namespace Video_Name_Finder
             }
 
             richTextBox_Status_Information.AppendText("Done!\n");
+
+            textBox_File_Name.Clear();
         }
     }
 }

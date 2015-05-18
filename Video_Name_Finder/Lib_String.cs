@@ -47,7 +47,7 @@ public class Str
         for (p_string = (file_name.Length - 3); (p_string - 3) > 0; p_string--)
         {
             result = file_name.Substring(p_string, 3);
-            if (result.IndexOf(" ") > 0)
+            if (result.IndexOf(" ") >= 0)
             {
                 continue;
             }
@@ -145,7 +145,7 @@ public class Str
 
             foreach (string s_name in split)
             {
-                if (Video_name.IndexOf(s_name) > 0)
+                if (Video_name.IndexOf(s_name) >= 0)
                 {
                     result = s_name;
                     break;
@@ -172,6 +172,10 @@ public class Str
 
         try
         {
+            if (old_name.CompareTo(new_name) == 0)
+            {
+                return ErrorDef.EFI_PARAMETER_ERROR;
+            }
             System.IO.Directory.Move(old_name, new_name);
         }
         catch (Exception e)
@@ -200,9 +204,12 @@ public class Str
         try 
         {
             //先針對目前目路的檔案做處理
-            foreach (string f in Directory.GetFiles(path))
+            if (!IsFolder)
             {
-                result = result + "\n" + f;
+                foreach (string f in Directory.GetFiles(path))
+                {
+                    result = result + "\n" + f;
+                }
             }
 
             //先找出所有目錄 
