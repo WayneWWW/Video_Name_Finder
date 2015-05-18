@@ -12,6 +12,7 @@ public class Global_Def
 
     public static class _VIDEO_INFO{
         public static string File_Name;
+        public static string File_Ext_Name;
         public static string Actor_Name;
         public static string Video_ID;
         public static string Video_Name;

@@ -58,18 +58,29 @@ namespace Video_Name_Finder
                     Global_Def._VIDEO_INFO.Rename = "";
                 }
 
+                try
+                {
+                    Global_Def._VIDEO_INFO.File_Ext_Name = Path.Substring(Path.LastIndexOf("."));
+                }
+                catch (Exception e)
+                {
+                }
+
                 //
                 // Rename
                 //
                 if (Global_Def._VIDEO_INFO.Rename.Length > 0)
                 {
-                    Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
+                    Global_Def._VIDEO_INFO.Rename = Global_Def._VIDEO_INFO.Rename + Global_Def._VIDEO_INFO.File_Ext_Name;
+                    //Str.Process_Video_Rename(Global_Def._VIDEO_INFO.File_Name, Global_Def._VIDEO_INFO.Rename);
                 }
+
 
                 //
                 // Print status
                 //
                 richTextBox_Status_Information.AppendText("File_Name: " + Global_Def._VIDEO_INFO.File_Name + "\n");
+                richTextBox_Status_Information.AppendText("File_Ext_Name: " + Global_Def._VIDEO_INFO.File_Ext_Name + "\n");
                 richTextBox_Status_Information.AppendText("Actor_Name: " + Global_Def._VIDEO_INFO.Actor_Name + "\n");
                 richTextBox_Status_Information.AppendText("Video_ID: " + Global_Def._VIDEO_INFO.Video_ID + "\n");
                 richTextBox_Status_Information.AppendText("Video_Name: " + Global_Def._VIDEO_INFO.Video_Name + "\n");
