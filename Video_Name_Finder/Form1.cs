@@ -80,7 +80,7 @@ namespace Video_Name_Finder
             return Status;
         }
 
-        private void button_AnalyzeFileName_Click(object sender, EventArgs e)
+        private void button_Process_Folder_Name_Click(object sender, EventArgs e)
         {
             //
             // Clear all rich text box
@@ -103,12 +103,8 @@ namespace Video_Name_Finder
             //
             // Parsing folder
             //
-            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text);
+            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, true);
             string[] split = temp_folder.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-            //
-            // Parsing file
-            //
 
             //
             // Output to rich text box
@@ -117,7 +113,51 @@ namespace Video_Name_Finder
             {
                 richTextBox_Rename_Before.AppendText(s_name + "\n");
                 Process_A_Data(s_name);
+                richTextBox_Status_Information.SelectionStart = richTextBox_Status_Information.Text.Length;
+                richTextBox_Status_Information.ScrollToCaret();
             }
+
+            richTextBox_Status_Information.AppendText("Done!\n");
+        }
+
+        private void button_Process_File_Name_Click(object sender, EventArgs e)
+        {
+            //
+            // Clear all rich text box
+            //
+            richTextBox_Status_Information.Clear();
+            richTextBox_Rename_Before.Clear();
+            richTextBox_Rename_After.Clear();
+
+            //
+            // Open folder diag box
+            //
+            if (textBox_File_Name.Text == "")
+            {
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    textBox_File_Name.Text = folderBrowserDialog.SelectedPath;
+                }
+            }
+
+            //
+            // Parsing file
+            //
+            string temp_folder = Str.Find_Folder_Recursive(textBox_File_Name.Text, false);
+            string[] split = temp_folder.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            //
+            // Output to rich text box
+            //
+            foreach (string s_name in split)
+            {
+                richTextBox_Rename_Before.AppendText(s_name + "\n");
+                Process_A_Data(s_name);
+                richTextBox_Status_Information.SelectionStart = richTextBox_Status_Information.Text.Length;
+                richTextBox_Status_Information.ScrollToCaret();
+            }
+
+            richTextBox_Status_Information.AppendText("Done!\n");
         }
     }
 }

@@ -47,6 +47,10 @@ public class Str
         for (p_string = (file_name.Length - 3); (p_string - 3) > 0; p_string--)
         {
             result = file_name.Substring(p_string, 3);
+            if (result.IndexOf(" ") > 0)
+            {
+                continue;
+            }
             if (int.TryParse(result, out i_temp))
             {
                 p_digit = p_string;
@@ -181,23 +185,44 @@ public class Str
     /// <summary>
     /// Recursive find folder name
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">Folder path</param>
+    /// <param name="IsFile">
+    /// False - File
+    /// True  - Folder
+    /// </param>
     /// <returns>
     /// All folder name
     /// </returns>
-    public static string Find_Folder_Recursive(string path)
+    public static string Find_Folder_Recursive(string path, bool IsFolder)
     {
         string result = path;
 
         try 
-        { 
+        {
+            //先針對目前目路的檔案做處理
+            foreach (string f in Directory.GetFiles(path))
+            {
+                result = result + "\n" + f;
+            }
+
             //先找出所有目錄 
             foreach (string d in Directory.GetDirectories(path)) 
             {
-                result = result + "\n" + d;
+                if (IsFolder)
+                {
+                    result = result + "\n" + d;
+                }
+                else
+                {
+                    //針對目前目路的檔案做處理 
+                    foreach (string f in Directory.GetFiles(d))
+                    {
+                        result = result + "\n" + f;
+                    }
+                }
 
                 //此目錄處理完再針對每個子目錄做處理 
-                Find_Folder_Recursive(d); 
+                Find_Folder_Recursive(d, IsFolder); 
             } 
         } 
         catch (System.Exception excpt) 

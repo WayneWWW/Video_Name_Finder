@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.button_Find_All_Actors_Name = new System.Windows.Forms.Button();
-            this.button_AnalyzeFileName = new System.Windows.Forms.Button();
+            this.button_Process_Folder_Name = new System.Windows.Forms.Button();
             this.textBox_File_Name = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.richTextBox_Status_Information = new System.Windows.Forms.RichTextBox();
             this.richTextBox_Rename_Before = new System.Windows.Forms.RichTextBox();
             this.richTextBox_Rename_After = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_Process_File_Name = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_Find_All_Actors_Name
@@ -49,16 +49,16 @@
             this.button_Find_All_Actors_Name.UseVisualStyleBackColor = false;
             this.button_Find_All_Actors_Name.Click += new System.EventHandler(this.button_Find_All_Actors_Name_Click);
             // 
-            // button_AnalyzeFileName
+            // button_Process_Folder_Name
             // 
-            this.button_AnalyzeFileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button_AnalyzeFileName.Location = new System.Drawing.Point(586, 6);
-            this.button_AnalyzeFileName.Name = "button_AnalyzeFileName";
-            this.button_AnalyzeFileName.Size = new System.Drawing.Size(90, 30);
-            this.button_AnalyzeFileName.TabIndex = 1;
-            this.button_AnalyzeFileName.Text = "Folder rename!";
-            this.button_AnalyzeFileName.UseVisualStyleBackColor = false;
-            this.button_AnalyzeFileName.Click += new System.EventHandler(this.button_AnalyzeFileName_Click);
+            this.button_Process_Folder_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_Process_Folder_Name.Location = new System.Drawing.Point(586, 6);
+            this.button_Process_Folder_Name.Name = "button_Process_Folder_Name";
+            this.button_Process_Folder_Name.Size = new System.Drawing.Size(90, 30);
+            this.button_Process_Folder_Name.TabIndex = 1;
+            this.button_Process_Folder_Name.Text = "Folder rename!";
+            this.button_Process_Folder_Name.UseVisualStyleBackColor = false;
+            this.button_Process_Folder_Name.Click += new System.EventHandler(this.button_Process_Folder_Name_Click);
             // 
             // textBox_File_Name
             // 
@@ -92,27 +92,28 @@
             this.richTextBox_Rename_After.TabIndex = 5;
             this.richTextBox_Rename_After.Text = "";
             // 
-            // button1
+            // button_Process_File_Name
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button1.Location = new System.Drawing.Point(682, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 30);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "File rename!";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_Process_File_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button_Process_File_Name.Location = new System.Drawing.Point(682, 6);
+            this.button_Process_File_Name.Name = "button_Process_File_Name";
+            this.button_Process_File_Name.Size = new System.Drawing.Size(90, 30);
+            this.button_Process_File_Name.TabIndex = 6;
+            this.button_Process_File_Name.Text = "File rename!";
+            this.button_Process_File_Name.UseVisualStyleBackColor = false;
+            this.button_Process_File_Name.Click += new System.EventHandler(this.button_Process_File_Name_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_Process_File_Name);
             this.Controls.Add(this.richTextBox_Rename_After);
             this.Controls.Add(this.richTextBox_Rename_Before);
             this.Controls.Add(this.richTextBox_Status_Information);
             this.Controls.Add(this.textBox_File_Name);
-            this.Controls.Add(this.button_AnalyzeFileName);
+            this.Controls.Add(this.button_Process_Folder_Name);
             this.Controls.Add(this.button_Find_All_Actors_Name);
             this.Name = "Form1";
             this.Text = "Video Name Finder";
@@ -125,13 +126,13 @@
         #endregion
 
         private System.Windows.Forms.Button button_Find_All_Actors_Name;
-        private System.Windows.Forms.Button button_AnalyzeFileName;
+        private System.Windows.Forms.Button button_Process_Folder_Name;
         private System.Windows.Forms.TextBox textBox_File_Name;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         public System.Windows.Forms.RichTextBox richTextBox_Status_Information;
         private System.Windows.Forms.RichTextBox richTextBox_Rename_Before;
         private System.Windows.Forms.RichTextBox richTextBox_Rename_After;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Process_File_Name;
     }
 }
 
