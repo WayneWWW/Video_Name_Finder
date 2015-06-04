@@ -6,6 +6,7 @@ public class Global_Def
     /// <summary>
     /// Global Variable Definition
     /// </summary>
+    public static string VERSION = "1.0";
 
     public static string PATH_DATABASE = "All_Actors_Name.txt";
     public static int WEB_SLEEP_TIME = 500;

@@ -19,7 +19,7 @@ namespace Video_Name_Finder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            this.Text = this.Text + " build: " + Global_Def.VERSION + "." + DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Day.ToString();
         }
 
         private void button_Find_All_Actors_Name_Click(object sender, EventArgs e)

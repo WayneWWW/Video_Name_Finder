@@ -81,6 +81,8 @@
             // 
             this.richTextBox_Rename_Before.Location = new System.Drawing.Point(12, 40);
             this.richTextBox_Rename_Before.Name = "richTextBox_Rename_Before";
+            this.richTextBox_Rename_Before.RightMargin = 1024;
+            this.richTextBox_Rename_Before.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.richTextBox_Rename_Before.Size = new System.Drawing.Size(380, 373);
             this.richTextBox_Rename_Before.TabIndex = 4;
             this.richTextBox_Rename_Before.Text = "";
@@ -89,6 +91,8 @@
             // 
             this.richTextBox_Rename_After.Location = new System.Drawing.Point(392, 40);
             this.richTextBox_Rename_After.Name = "richTextBox_Rename_After";
+            this.richTextBox_Rename_After.RightMargin = 1024;
+            this.richTextBox_Rename_After.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.richTextBox_Rename_After.Size = new System.Drawing.Size(380, 373);
             this.richTextBox_Rename_After.TabIndex = 5;
             this.richTextBox_Rename_After.Text = "";

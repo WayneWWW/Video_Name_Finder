@@ -137,11 +137,11 @@ public class Net
         }
 
         //搜尋關鍵字
-        start = temp.IndexOf("border-top");
+        start = temp.IndexOf("movie-box");
         temp = temp.Substring(start);
-        start = temp.IndexOf("target=\"_blank\">");
-        temp = temp.Substring(start + 16);
-        result = temp.Remove(temp.IndexOf("</a>"));
+        start = temp.IndexOf("title=\"");
+        temp = temp.Substring(start + 7);
+        result = temp.Remove(temp.IndexOf("\">"));
 
         return result;
     }
