@@ -79,22 +79,22 @@ public class Net
                 //
                 // Todo: Find a way to call main form rtc member
                 //
-                //richTextBox_Status_Information.AppendText("Process: " + "http://www.avsow.com/tw/actresses/currentPage/" + page_number.ToString() + "/" + "\n");
-                
-                result = GetWebsiteContent(@"http://www.avsow.com/tw/actresses/currentPage/" + page_number.ToString() + "/");
+                //richTextBox_Status_Information.AppendText("Process: " + "https://www.avmoo.com/tw/actresses/currentPage/" + page_number.ToString() + "/" + "\n");
+
+                result = GetWebsiteContent(@"https://www.avmoo.com/tw/actresses/currentPage/" + page_number.ToString() + "/");
 
                 //搜尋關鍵字
                 int start = result.IndexOf("<div id=\"waterfall\">");
                 result = result.Substring(start);
 
                 //減去不要的字元. 
-                string[] split = result.Split(new string[] { "<b>" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] split = result.Split(new string[] { "<span>" }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (string s_name in split)
                 {
-                    if (s_name.IndexOf("</b>") > 0)
+                    if (s_name.IndexOf("</span>") > 0)
                     {
-                        string ss_name = s_name.Remove(s_name.IndexOf("</b>"));
+                        string ss_name = s_name.Remove(s_name.IndexOf("</span>"));
                         sw.WriteLine(ss_name);
                     }
                 }
@@ -129,7 +129,7 @@ public class Net
             return "";
         }
 
-        temp = GetWebsiteContent(@"http://www.avsow.net/tw/search/" + Video_ID);
+        temp = GetWebsiteContent(@"http://www.avmoo.com/tw/search/" + Video_ID);
 
         if (temp.IndexOf("搜尋沒有結果") > 0)
         {

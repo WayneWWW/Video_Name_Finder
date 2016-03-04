@@ -10,6 +10,7 @@ public class Global_Def
 
     public static string PATH_DATABASE = "All_Actors_Name.txt";
     public static int WEB_SLEEP_TIME = 500;
+    public static string PATH_WEBSITE = "http://www.avmoo.com/tw/search/";
 
     public static class _VIDEO_INFO{
         public static string File_Name;
